@@ -41,6 +41,27 @@ async function run() {
     })
 
 
+    //Edit Exiting User
+    app.patch("/users/:id",  async(req, res) =>{
+      const id = req.params.id;
+      const filter = {
+        _id: new ObjectId(id)
+      }
+      const modifiedUser = req.body;
+      
+      const updatedDocument = {
+        $set: {
+          name: modifiedUser.name,
+          email: modifiedUser.email,
+          role: modifiedUser.role
+        }
+      }
+
+      const result = await userCollection.updateOne(filter, updatedDocument);
+      res.send(result)
+    })
+
+
     //get single user using id
     app.get("/users/:id", async(req, res, )=>{
       const id = req.params.id;
