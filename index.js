@@ -32,6 +32,15 @@ async function run() {
       res.send(result);
     })
 
+
+    //Add a new user 
+    app.post("/users", async(req, res)=>{
+      const newUser = req.body;
+      const result = await userCollection.insertOne(newUser);
+      res.send(result)
+    })
+
+
     //get single user using id
     app.get("/users/:id", async(req, res, )=>{
       const id = req.params.id;
